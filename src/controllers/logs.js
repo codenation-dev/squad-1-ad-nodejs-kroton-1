@@ -4,11 +4,17 @@ const usersModel = require('../models')['users']
 let Logs = {}
 
 Logs.getAll = async (req, res, next) => {
-  // ...
+  const data = await logsModel.findAll({})
+  res.status(200).json( data )
+  // a gente traz em json mesmo né? A galera do front que depois deixa tabular?
 }
 
 Logs.getById = async (req, res, next) => {
-  // ...
+  const {logId} = req.params
+  const data = await logsModel.findOne({
+    where: { id: logId }
+  })
+  res.status(200).json(data)
 }
 
 Logs.getLogUsers = async (req, res, next) => {

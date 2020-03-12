@@ -4,7 +4,7 @@ const { Op } = require('sequelize')
 let Users = {}
 
 Users.getAll = async (req, res, next) => {
-  // ...
+  
 }
 
 Users.getById = async (req, res, next) => {
