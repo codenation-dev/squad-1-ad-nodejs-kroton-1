@@ -2,7 +2,8 @@ const express = require('express')
 const router = express.Router()
 const controller = require('../controllers/users')
 
-router.get('/', controller.getAll)
+//Acho que não há necessidade
+//router.get('/', controller.getAll)
 
 router.get('/:userId', controller.getById)
 

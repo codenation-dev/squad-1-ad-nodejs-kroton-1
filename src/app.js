@@ -5,6 +5,6 @@ const routes = require('./routes')
 
 app.use(bodyParser.json())
 
-app.use('/v1', routes)
+app.use('', routes)
 
 module.exports = { app }
