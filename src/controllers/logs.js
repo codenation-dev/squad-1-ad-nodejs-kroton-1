@@ -4,8 +4,7 @@ const usersModel = require('../models')['users']
 let Logs = {}
 
 Logs.getAll = async (req, res, next) => {
-  console.log("Teste");
-  
+    
 }
 
 Logs.getById = async (req, res, next) => {
