@@ -108,7 +108,7 @@ describe('The API on /log Endpoint at DELETE method should...', () => {
   })
 })
 
-describe('The API on /signin Endpoint at POST method should...', () => {
+describe('The API on /signup Endpoint at POST method should...', () => {
   afterEach(async () => {
     clearDB()
   })
