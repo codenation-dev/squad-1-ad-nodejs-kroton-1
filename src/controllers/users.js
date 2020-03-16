@@ -3,7 +3,7 @@ const { Op } = require('sequelize')
 const jwt = require('jsonwebtoken')
 
 let Users = {}
-
+// precisa implementar a autentificação ainda
 Users.getAll = async (req, res, next) => {
   
 }
