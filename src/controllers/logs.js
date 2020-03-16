@@ -6,41 +6,26 @@ let Logs = {}
 Logs.getAll = async (req, res, next) => {
   const data = await logsModel.findAll({})
   res.status(200).json( data )
-  // a gente traz em json mesmo né? A galera do front que depois deixa tabular?
+
 }
 
 Logs.getById = async (req, res, next) => {
+  //parametros passados por exemplo como: {"level": "Error"}
   const {logId} = req.params
-  const data = await logsModel.findOne({
-    where: { id: logId }
+  await logsModel.findAll({
+    where:  JSON.parse(logId) 
+  }).then(result => {
+    if(!result.length){
+      return res.status(404).send("Nada encontrado")
+    }
+    res.status(200).json(result)
   })
-  res.status(200).json(data)
 }
 
-Logs.getLogUsers = async (req, res, next) => {
-  // ...
-}
 
 Logs.create = async (req, res, next) => {
-  // ...
-}
-
-Logs.update = async (req, res, next) => {
-  const { logId } = req.params
-  const result = await logsModel.update(req.body, {
-    where: { id: logId }
-  })
-  
-  res.status(200).json({ result })
-}
-
-Logs.delete = async (req, res, next) => {
-  const { logId } = req.params
-  const result = await logsModel.destroy({
-    where: { id: logId }
-  })
-
-  res.status(204).json({ result })
+  const result = await logsModel.create(req.body)
+  res.status(201).json(result)
 }
 
 module.exports = Logs
