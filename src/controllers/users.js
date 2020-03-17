@@ -33,4 +33,9 @@ Users.delete = async (req, res, next) => {
   res.status(204).json({ result })
 }
 
+//operações de login e autenticação
+Users.login = async (req, res, next) => {
+  // ...
+}
+
 module.exports = Users
