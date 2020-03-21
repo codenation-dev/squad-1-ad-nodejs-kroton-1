@@ -1,4 +1,15 @@
 module.exports = (sequelize, DataTypes) =>
   sequelize.define('logs', {
-    // ... Implemente as colunas de logs
+    level: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    description: DataTypes.STRING,
+    message: DataTypes.STRING,    
+    system: {
+      type: DataTypes.STRING,
+      validate: {
+        isLowerCase: true
+      }
+    }
   })
