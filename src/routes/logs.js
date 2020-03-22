@@ -1,17 +1,19 @@
 const express = require('express')
 const router = express.Router()
 const controller = require('../controllers/logs')
+const { authJwt } = require("../middleware");
 
-router.get('/', controller.getAll)
 
-router.get('/:logId', controller.getById)
+router.get('/', authJwt.verifyToken, controller.getAll)
 
-router.get('/:logId/users', controller.getLogUsers)
+router.get('/level/:level', authJwt.verifyToken, controller.getByLevel)
 
-router.post('/', controller.create)
+router.get('/system/:system', authJwt.verifyToken, controller.getBySystem)
 
-router.put('/:logId', controller.update)
-
-router.delete('/:logId', controller.delete)
+router.post('/', authJwt.verifyToken, controller.create)
 
 module.exports = router
+
+
+
+  

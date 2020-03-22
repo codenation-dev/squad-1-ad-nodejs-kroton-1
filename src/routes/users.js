@@ -1,15 +1,18 @@
 const express = require('express')
 const router = express.Router()
+const { verifySignUp } = require("../middleware");
+const { authJwt } = require("../middleware");
 const controller = require('../controllers/users')
 
-router.get('/', controller.getAll)
+router.post('/signup', verifySignUp.checkDuplicateUsernameOrEmail , controller.signup)
 
-router.get('/:userId', controller.getById)
+router.post('/login', controller.login)
 
-router.post('/', controller.create)
+router.get('/', authJwt.verifyToken , controller.getUser)
 
-router.put('/:userId', controller.update)
+router.put('/update', authJwt.verifyToken, controller.update)
 
-router.delete('/:userId', controller.delete)
+router.delete('/delete', authJwt.verifyToken , controller.delete)
 
+//arquivas os logs 
 module.exports = router
