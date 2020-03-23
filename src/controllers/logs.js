@@ -13,7 +13,6 @@ Logs.getAll = async (req, res, next) => {
     where: {userId: req.userId}
   })
   res.status(200).json( data )
-
 }
 
 Logs.getByLevel = async (req, res, next) => {

@@ -22,6 +22,8 @@ const Logs = sequelize.import(
 )
 
 // Implemente o relacionamento entre Users e Logs aqui...
+Users.hasMany(Logs)
+Logs.belongsTo(Users)
 
 const db = {}
 

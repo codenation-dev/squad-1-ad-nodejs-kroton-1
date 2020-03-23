@@ -4,6 +4,7 @@ const { verifySignUp } = require("../middleware");
 const { authJwt } = require("../middleware");
 const controller = require('../controllers/users')
 
+
 router.post('/signup', verifySignUp.checkDuplicateUsernameOrEmail , controller.signup)
 
 router.post('/login', controller.login)
@@ -14,5 +15,5 @@ router.put('/update', authJwt.verifyToken, controller.update)
 
 router.delete('/delete', authJwt.verifyToken , controller.delete)
 
-//arquivas os logs 
+
 module.exports = router

@@ -5,8 +5,6 @@ const bcrypt = require("bcryptjs");
 const config = require("../config/auth.config");
 
 let Users = {}
-// precisa implementar a autentificação ainda
-
 
 Users.signup = (req, res) => {
   // Save User to Database
@@ -88,39 +86,6 @@ Users.delete = async (req, res, next) => {
   }).then(res.send({ message: "User was deleted!" }))
 
 }
-
-/*
-Users.getById = async (req, res, next) => {
-  const {userId} = req.params
-  await user.findAll({
-    where: {id: userId }
-  }).then(result => {
-    if(!result.length){
-      return res.status(404).send("Nada encontrado")
-    }
-    res.status(200).json(result)
-  })
-}
-*/
-
-/*
-Users.create = async (req, res, next) => {
-  const result = await model.create(req.body)
-  res.status(201).json("Cadastro realizado!")
-}
-
-
-Users.delete = async (req, res, next) => {
-  const { userId } = req.params
-  const result = await model.destroy({
-    where: { id: userId }
-  })
-
-  res.status(204).json({ result })
-}
-
-
-*/
 
 
 module.exports = Users
