@@ -1,9 +1,9 @@
 const ulogs = require('../models')['logs']
 const User = require('../models')['users']
 
-checkDuplicateUsernameOrEmail = (req, res, next) => {
+checkDuplicateUsernameOrEmail = async (req, res, next) => {
 
-      User.findOne({
+     await User.findOne({
         where: {
           email: req.body.email
         }

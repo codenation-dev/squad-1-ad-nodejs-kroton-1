@@ -28,7 +28,7 @@ Logs.getByLevel = async (req, res, next) => {
     }
   }).then(result => {
     if(!result.length){
-      return res.status(404).send("Nada encontrado")
+      return res.status(404).send("No data found")
     }
     res.status(200).json(result)
   })
@@ -47,7 +47,7 @@ Logs.getBySystem = async (req, res, next) => {
     }
   }).then(result => {
     if(!result.length){
-      return res.status(404).send("Nada encontrado")
+      return res.status(404).send("No data found")
     }
     res.status(200).json(result)
   })
