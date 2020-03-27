@@ -7,7 +7,9 @@
     "test": "test"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "sync": "node src/bin/syncDB",
+    "start": "node src/bin/www"
   },
   "repository": {
     "type": "git",
