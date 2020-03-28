@@ -1,0 +1,1 @@
+//middleware para geração de token ou validação
