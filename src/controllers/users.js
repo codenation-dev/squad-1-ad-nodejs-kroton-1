@@ -83,7 +83,7 @@ Users.update = async (req, res, next) => {
 Users.delete = async (req, res, next) => {
      await user.destroy({
     where: { id: req.userId }
-  }).then(res.status(204).send({ message: "User was deleted!" }))
+  }).then(res.status(204).json({ message: "User was deleted!" }))
 
 }
 

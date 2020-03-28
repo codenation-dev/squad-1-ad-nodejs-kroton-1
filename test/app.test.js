@@ -28,14 +28,14 @@ beforeAll(() => clearDB())
 afterAll(() => clearDB())
 
 
-const logs_tests = [
+const log_test = 
     {
-      'id': 1445648915616,
       'level': 'error',
       'description': 'expected expression, got "||"',
       'message': 'please, consult the website for more information',
       'system': 'citrix'
-    },
+    }
+    /*
     {
       'id': 1498414561551,
       'type': 'warning',
@@ -43,7 +43,7 @@ const logs_tests = [
       'message': 'please, consult the manual for mor information',
       'system': 'docenteonline'
     }
-]
+*/
 
 describe('The API on users/signup/ Endpoint at POST method should...', () => {
 
@@ -133,7 +133,7 @@ describe('The API on users/login Endpoint at POST method should...', () => {
 
 describe('The API on /users Endpoint at GET method should...', () => {
 
-       test(`return 201 as status code and the information of a new record created`, async () => {
+       test(`return 201 as status code and the information of the user created`, async () => {
 
        await request(server.app)
       .post('/users/signup')
@@ -278,101 +278,94 @@ describe('The API on /users/delete Endpoint at DELETE method should...', () => {
 
 })
 
+describe('The API on /logs Endpoint at POST method should...', () => {
 
-/*
+  test(`return 201 as status code for a new log`, async () => {
+
+    await request(server.app)
+    .post('/users/signup')
+    .send({
+      name: 'Arlequina',
+      email: 'arle@gmail.com',
+      password: 'admin@123!'
+    })
+
+      const { accessToken = '' } = (
+        await request(server.app)
+          .post('/users/login')
+          .send({
+            email: 'arle@gmail.com',
+            password: 'admin@123!'
+          })
+      ).body
+
+      
+    const res = await request(server.app)
+    .post('/logs' )
+    .set('x-access-token', accessToken)
+    .send( {
+      level: 'error',
+      description: 'expected expression, got "||"',
+      message: 'please, consult the website for more information',
+      system: 'citrix'
+    })
+    
+    expect(res.statusCode).toEqual(201)
+    expect(res.body).toEqual({ message: " Log was registered!"})
+    
+  })
+
+})
+
 describe('The API on /logs Endpoint at GET method should...', () => {
-  beforeEach(async () => {
-    db.logs.bulkCreate(logs_tests)
+
+  test(`return 200 as status code and a list of logs`, async () => {
+
+    await request(server.app)
+    .post('/users/signup')
+    .send({
+      name: 'lanterna',
+      email: 'lanterninha@gmail.com',
+      password: 'admin@123!'
+    })
+
+      const { accessToken = '' } = (
+        await request(server.app)
+          .post('/users/login')
+          .send({
+            email: 'lanterninha@gmail.com',
+            password: 'admin@123!'
+          })
+      ).body
+
+      
+     await request(server.app)
+    .post('/logs' )
+    .set('x-access-token', accessToken)
+    .send( {
+      level: 'error',
+      description: 'expected expression, got "||"',
+      message: 'please, consult the website for more information',
+      system: 'citrix'
+    })
+
+    await request(server.app)
+    .post('/logs' )
+    .set('x-access-token', accessToken)
+    .send( {
+      level: 'warm',
+      description: 'attencion, outdated package"',
+      message: 'install a new version of package xyz',
+      system: 'netflix'
+    })
+    
+
+    const res = await request(server.app)
+    .get('/logs' )
+    .set('x-access-token', accessToken)
+    
+    expect(res.statusCode).toEqual(200)
+    
   })
 
-  afterEach(async () => {
-    clearDB()
-  })
-
-  test(`return 200 as status code and have 'total' and 'logs' as properties`, async () => {
-    const res = await request(server.app).get('/logs')
-    expect(res.body.total).toBe(logs_tests.length)
-    expect(res.body.logs).toMatchObject(logs_tests)
-  })
-
-  test(`return the 'log' property with all items from DB`, async () => {
-    const res = await request(server.app).get('/logs')
-    expect(res.body.logs).toEqual(logs_tests)
-  })
 })
-
-describe('The API on /log/:logId Endpoint at GET method should...', () => {
-  beforeEach(async () => {
-    // ...
-  })
-
-  afterEach(async () => {
-    clearDB()
-  })
-})
-
-describe('The API on /log/:logId/info Endpoint at GET method should...', () => {
-  beforeEach(async () => {
-    // ...
-  })
-
-  afterEach(async () => {
-    clearDB()
-  })
-})
-
-describe('The API on /log Endpoint at POST method should...', () => {
-  afterEach(async () => {
-    clearDB()
-  })
-})
-
-describe('The API on /log Endpoint at PATCH method should...', () => {
-  beforeEach(async () => {
-    // ...
-  })
-
-  afterEach(async () => {
-    clearDB()
-  })
-})
-
-describe('The API on /log Endpoint at DELETE method should...', () => {
-  beforeEach(async () => {
-    // ...
-  })
-
-  afterEach(async () => {
-    clearDB()
-  })
-})
-
-describe('The API on /signup Endpoint at POST method should...', () => {
-  afterEach(async () => {
-    clearDB()
-  })
-})
-
-describe('The API on /login Endpoint at POST method should...', () => {
-  afterEach(async () => {
-    clearDB()
-  })
-})
-
-describe('The API on / Endpoint at GET method should...', () => {
-  test(`return 200 as status code and have all list of routes`, async () => {
-    const res = await request(server.app).get('/')
-    const routes = {
-      "GET":
-      ['/logs', '/log/:logId', '/log/:logId/info'],
-      "POST":
-      ['/log', '/signin', '/login'],
-      'PATCH':
-      ['/log'],
-      'DELETE':
-      ['/log']
-    }
-    expect(res.body.routes).toMatchObject(routes)
-  })
-})
-*/

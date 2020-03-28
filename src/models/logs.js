@@ -6,10 +6,7 @@ module.exports = (sequelize, DataTypes) =>
     },
     description: DataTypes.STRING,
     message: DataTypes.STRING,    
-    system: {
-      type: DataTypes.STRING,
-      validate: {
-        isLowerCase: true
-      }
+    system: DataTypes.STRING
+      
     }
-  })
+  )

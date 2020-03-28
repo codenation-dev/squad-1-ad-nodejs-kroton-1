@@ -54,14 +54,21 @@ Logs.getBySystem = async (req, res, next) => {
 }
 
 Logs.create = async (req, res, next) => {
-  const result = await logsModel.create({
+  //const IdUser = req.userId;
+  try{
+  await logsModel.create({
     "level":req.body.level,
     "description":req.body.description,
     "message": req.body.message,
     "system": req.body.system,
-    "userId": req.userId}
-    )
-  res.status(201).json(result)
+    "userId": req.userId
+    })
+    .then(result => {
+      return res.status(201).json({ message: " Log was registered!"});
+    })
+  } catch(err){
+    res.status(404).json({ message: "Error: Log was not registered!" })
+  }
 }
 
 module.exports = Logs

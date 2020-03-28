@@ -10,3 +10,4 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: 1234
       MYSQL_DATABASE: codenation_development
+
